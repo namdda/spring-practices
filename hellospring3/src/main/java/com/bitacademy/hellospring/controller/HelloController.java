@@ -2,6 +2,7 @@ package com.bitacademy.hellospring.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +47,14 @@ public class HelloController {
 		
 	}
 	
+	@RequestMapping(value= "/hello5", produces ="text/html;charset=utf-8")
 	@ResponseBody
-	@RequestMapping("/hello5")
 	public String hello5(String name) {
-		return "Hello"+name;
+
+		return "Hello "+name;
 		
 	}
+	
+	
+
 }
