@@ -1,21 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.bitacademy</groupId>
-		<artifactId>spring-practices</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>hellospring03</artifactId>
-	<packaging>war</packaging>
-	
-	<properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.bitacademy</groupId>
+    <artifactId>spring-practices</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>emaillist03</artifactId>
+  <packaging>war</packaging>
+ 
+  <properties>
 		<org.springframework-version>4.3.8.RELEASE</org.springframework-version>
 	</properties>
-	
-	<dependencies>
-	<!-- Spring Core + Spring Context -->
+  
+  <dependencies>
+  			
+  		<!-- Spring Core, Spring Context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -28,18 +27,31 @@
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+			
+  
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.21</version>
+		</dependency>
 		
+		<!-- jstl -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
-		<finalName>hellospring03</finalName>
+		<finalName>emaillist03</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -66,5 +78,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>		
+	</build>
+		
 </project>
