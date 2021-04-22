@@ -16,7 +16,7 @@ public class GuestbookController {
 	@Autowired
 	GuestbookRepository guestbookRepository;
 	
-	@RequestMapping("")
+	@RequestMapping({"","/", "/list"})
 	public String list(Model model) {
 		List<GuestbookVo> list = guestbookRepository.selectAll();
 		model.addAttribute("list", list);		

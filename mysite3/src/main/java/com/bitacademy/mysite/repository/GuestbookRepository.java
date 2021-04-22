@@ -1,4 +1,4 @@
-package com.bitacademy.guestbook.repository;
+package com.bitacademy.mysite.repository;
 
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.bitacademy.guestbook.vo.GuestbookVo;
+import com.bitacademy.mysite.vo.GuestbookVo;
 /*
  * 데이터에 대한 접근, 조작을 제어하는 Controller ( Data Access Object)
  * 
@@ -74,7 +74,7 @@ public class GuestbookRepository {
 		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			String sql =  "select no, name, date_format(reg_date, '%Y-%m-%d  %H:%i:%s') as reg_date,contents "
+			String sql =  "select no, name,  date_format(reg_date,'%Y-%m-%d %H:%i:%s'),contents "
 					+ "	from guestbook "
 					+ "	order by reg_date desc;";
 			
