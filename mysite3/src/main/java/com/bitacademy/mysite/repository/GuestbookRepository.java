@@ -8,37 +8,46 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.bitacademy.mysite.vo.GuestbookVo;
 
+import com.bitacademy.mysite.vo.GuestbookVo;
 
 @Repository
 public class GuestbookRepository {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 	
-	 //1. 방명록 전체 list찾기
-	 public List<GuestbookVo> findAll() {
-		 
-		  return sqlSession.selectList("guestbook.findAll");
-		
-	}
+	@Autowired
+	private DataSource dataSource;
 	
-	//2. 방명록작성
-	public boolean insert(GuestbookVo vo) {
-
-		int count = sqlSession.insert("guestbook.insert",vo);
-		return count ==1;	
-
-	}
-	
-	//3. 방명록삭제
 	public boolean delete(GuestbookVo vo) {
-		
+		boolean result = false;
+
 		int count = sqlSession.delete("guestbook.delete", vo);
-		return count ==1;	
+		result = count == 1;
+	
+		return result;
+	}
+
+	public boolean insert(GuestbookVo vo) {
+		boolean result = false; 
+		int count = sqlSession.insert("guestbook.insert", vo);
+		
+		result = count == 1;		
+		
+	
+		return result;
+	}
+
+	public List<GuestbookVo> findAll() {
+		List<GuestbookVo> list = sqlSession.selectList("guestbook.findAll");
+		
+		
+		return list;
 	}
 }
