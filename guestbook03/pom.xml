@@ -7,21 +7,28 @@
   </parent>
   <artifactId>guestbook03</artifactId>
   <packaging>war</packaging>
+  
+  
 <properties>
-		<org.springframework-version>4.3.9.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.8.RELEASE</org.springframework-version>
 	</properties>
+	
 	<dependencies>
-		<!-- spring core, context, AOP -->
+		<!-- Spring Core, Spring Context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -36,12 +43,12 @@
 		</dependency>
 		<!-- jstl -->
 		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>				
 	</dependencies>
-
+	
 	<build>
 		<finalName>guestbook03</finalName>
 		<resources>
@@ -70,5 +77,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</build>	
 </project>

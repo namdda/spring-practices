@@ -1,19 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	pageContext.setAttribute("newline", "\n");
-
-%>
-<!DOCTYPE html>
+<% pageContext.setAttribute("newline", "\n"); %>
 <html>
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="${pageContext.request.contextPath}/assets/css/guestbook.css"
+<link
+	href="${pageContext.request.contextPath }/assets/css/guestbook.css"
 	rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -21,9 +17,8 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="guestbook">
-				<form action="${pageContext.request.contextPath}/guestbook"
+				<form action="${pageContext.request.contextPath }/guestbook/insert"
 					method="post">
-					<input type="hidden" name="a" value="insert">
 					<table>
 						<tr>
 							<td>이름</td>
@@ -40,24 +35,24 @@
 					</table>
 				</form>
 				<ul>
-				<c:set var="count" value="${fn:length(list)}" /> 
-				<c:forEach items="${list}" var="vo" varStatus="status">
-					<li>
+					<c:set var="count" value="${fn:length(list) }" />
+					<c:forEach items="${list }" begin="0" step="1" var="vo"
+						varStatus="status">
+						<li>
 							<table>
 								<tr>
 									<td>[${count-status.index }]</td>
 									<td>${vo.name }</td>
 									<td>${vo.regDate }</td>
 									<td><a
-										href="${pageContext.request.contextPath}/guestbook?a=deleteform&no=${vo.no}">삭제</a></td>
+										href="${pageContext.request.contextPath }/guestbook/delete?no=${vo.no}">삭제</a></td>
 								</tr>
 								<tr>
-									<td colspan=4>${fn:replace(vo.contents,newline, "<br>")}</td>
+									<td colspan=4>${fn:replace(vo.contents, newline,"<br>") }</td>
 								</tr>
-							</table>
-							<br>
-							</li>
-						</c:forEach>
+							</table> <br>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

@@ -1,20 +1,15 @@
 package com.bitacademy.guestbook.vo;
 
-/*
- * 방명록을 위한 Model (Value Object)
- * GuestBookDao에서 제어
- */
-
 public class GuestbookVo {
-	int no;
-	String name;
-	String password;
-	String contents;
-	String regDate;
-	public int getNo() {
+	private Long no;
+	private String name;
+	private String password;
+	private String regDate;
+	private String contents;
+	public Long getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(Long no) {
 		this.no = no;
 	}
 	public String getName() {
@@ -29,23 +24,21 @@ public class GuestbookVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getContents() {
-		return contents;
-	}
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
 	public String getRegDate() {
 		return regDate;
 	}
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
 	@Override
 	public String toString() {
-		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", contents=" + contents
-				+ ", regDate=" + regDate + "]";
+		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", regDate=" + regDate
+				+ ", message=" + contents + "]";
 	}
-	
-
 }

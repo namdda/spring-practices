@@ -1,6 +1,5 @@
 package com.bitacademy.guestbook.repository;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,134 +11,167 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.bitacademy.guestbook.vo.GuestbookVo;
-/*
- * 데이터에 대한 접근, 조작을 제어하는 Controller ( Data Access Object)
- * 
- */
+
 @Repository
 public class GuestbookRepository {
-	// jdbc 연동을 통한 mysql connection 획득, sql execption은 각 메소드에서 처리한다.
-	public static Connection getConnection() throws SQLException {
+	public List<GuestbookVo> findAll() {
+		List<GuestbookVo> list = new ArrayList<>();
+		
 		Connection conn = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8&serverTimezone=UTC";
-			conn = DriverManager.getConnection(url,"webdb","webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("error " + e);
-		}		
-		return conn;
-	}
-	// 방명록 추가
-	public boolean insert(GuestbookVo vo) {
-		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
-		Connection conn = null ;
 		PreparedStatement pstmt = null;
-		boolean result = false;
-		try {
-			conn = getConnection();
-			String sql =  "insert "
-					+ "	into guestbook "
-					+ "	values(null,?,?,?,now());";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getContents());
-			// 결과가 1이 아닌경우 false return
-			result = 1 == pstmt.executeUpdate();
-
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(conn != null) {
-					conn.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
+		ResultSet rs = null;
 				
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-		}
-		return result;
-	}
-	// 전체 방명록 조회, 날짜는 sql에서 String format 반환됨
-	public List<GuestbookVo> selectAll() {
-		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
-		Connection conn = null ;
-		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			String sql =  "select no, name, date_format(reg_date, '%Y-%m-%d  %H:%i:%s') as reg_date,contents "
-					+ "	from guestbook "
-					+ "	order by reg_date desc;";
 			
+			// 3. SQL 준비
+			String sql =
+				"   select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, contents" +
+				"     from guestbook" +
+				" order by reg_date desc";
 			pstmt = conn.prepareStatement(sql);
 			
-			ResultSet rs = pstmt.executeQuery();
+			// 4. 바인딩
+			
+			// 5. sql문 실행
+			rs = pstmt.executeQuery();
+			
+			// 6. 데이터 가져오기
 			while(rs.next()) {
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String regDate = rs.getString(3);
+				String contents = rs.getString(4);
+				
 				GuestbookVo vo = new GuestbookVo();
-				vo.setNo(rs.getInt(1));
-				vo.setName(rs.getString(2));
-				vo.setRegDate(rs.getString(3));
-				vo.setContents(rs.getString(4));
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setRegDate(regDate);
+				vo.setContents(contents);
+				
 				list.add(vo);
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
+			System.out.println("error:" + e);
+		} finally {
 			try {
-				if(conn != null) {
-					conn.close();
+				// 3. 자원정리
+				if(rs != null) {
+					rs.close();
 				}
 				if(pstmt != null) {
 					pstmt.close();
 				}
-				
-			}catch (Exception e) {
-				// TODO: handle exception
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
+		
 		return list;
 	}
-	// 번호와 비밀번호를 통한 방명록 메시지 삭제
+	
 	public boolean delete(GuestbookVo vo) {
-		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
-		Connection conn = null ;
-		PreparedStatement pstmt = null;
 		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			String sql =  "delete from guestbook "
-					+ "	where no = ? and password = ?;";
 			
+			// 3. SQL 준비
+			String sql =
+					" delete" +
+					"   from guestbook" +
+					"  where no=?" +
+					"    and password=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getNo());
+			
+			// 4. 바인딩
+			pstmt.setLong(1, vo.getNo());
 			pstmt.setString(2, vo.getPassword());
-			// 결과가 1이 아닌경우 false return
-			result = 1 == pstmt.executeUpdate();
-
+			
+			// 5. sql문 실행
+			int count = pstmt.executeUpdate();
+			
+			result = count == 1;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
+			System.out.println("error:" + e);
+		} finally {
 			try {
-				if(conn != null) {
-					conn.close();
-				}
+				// 3. 자원정리
 				if(pstmt != null) {
 					pstmt.close();
 				}
-				
-			}catch (Exception e) {
-				// TODO: handle exception
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		}
+		}		
+		
 		return result;		
 	}
+	
+	public boolean insert(GuestbookVo vo) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			
+			// 3. SQL 준비
+			String sql =
+					" insert" +
+					"   into guestbook" +
+					" values (null, ?, ?, ?, now())";
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4. 바인딩
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPassword());
+			pstmt.setString(3, vo.getContents());
+			
+			// 5. sql문 실행
+			int count = pstmt.executeUpdate();
+			
+			result = count == 1;
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				// 3. 자원정리
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		
+		return result;
+	}
+	
+	// jdbc 연동을 통한 mysql connection 획득, sql execption은 각 메소드에서 처리한다.
+		public static Connection getConnection() throws SQLException {
+			Connection conn = null;
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8&serverTimezone=UTC";
+				conn = DriverManager.getConnection(url,"webdb","webdb");
+			} catch (ClassNotFoundException e) {
+				System.out.println("error " + e);
+			}		
+			return conn;
+		}
 }
