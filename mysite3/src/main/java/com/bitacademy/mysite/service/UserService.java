@@ -20,6 +20,10 @@ public class UserService {
 	public UserVo getUser(UserVo vo) {
 		return userRepository.findByEmailAndPassword(vo);
 	}
+	
+	public UserVo getUser2(UserVo vo) {
+		return userRepository.find(vo);
+	}
 
 	public UserVo getUser(Long no) {
 		return userRepository.findByNo(no);

@@ -20,6 +20,10 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByEmailAndPassword", vo);
 	}
 	
+	public UserVo find(UserVo vo) throws UserRepositoryException {
+		return sqlSession.selectOne("user.find", vo);
+	}
+	
 	public boolean insert(UserVo vo) {
 		System.out.println(vo.getNo());
 		int count = sqlSession.insert("user.insert", vo);
