@@ -32,5 +32,7 @@
 		<module>emaillist03</module>
 		<module>guestbook03</module>
 		<module>mysite3</module>
+		<module>semiproject</module>
+		<module>pretesting</module>
 	</modules>
 </project>
