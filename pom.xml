@@ -34,5 +34,6 @@
 		<module>mysite3</module>
 		<module>semiproject</module>
 		<module>pretesting</module>
+		<module>notimeforcss</module>
 	</modules>
 </project>

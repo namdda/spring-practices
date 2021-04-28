@@ -5,9 +5,8 @@
     <artifactId>spring-practices</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>pretesting</artifactId>
+  <artifactId>notimeforcss</artifactId>
   <packaging>war</packaging>
-  
 <dependencies>
 		<!--Servlet -->
 		<dependency>
@@ -81,7 +80,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>pretesting</finalName>
+		<finalName>notimeforcss</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
