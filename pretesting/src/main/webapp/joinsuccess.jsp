@@ -24,49 +24,7 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	
-	<script src="assets/js/jquery/jquery-3.6.0.js" type="text/javascript"></script>
-<script>
-$(function(){
-	$("#input_id").change(function(){
-		$('#img-check').hide();
-		$('#btn-check').show();
-	});
 	
-	$("#btn-check").click(function(){
-		const email = $("#input-email").val();
-		if(email == ''){
-			return;
-		}
-		$.ajax({
-			url: "/semiproject/api/user/existid?id=" + id,
-			async: true,
-			data: '',
-			dataType: 'json',
-			success: function(response){
-				if(response.result != 'success'){
-					console.error(response.message);
-					return;
-				}
-				
-				if(response.data == true){
-					alert('이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요');
-					$("#input-email")
-						.val('')
-						.focus();
-					return;
-				}
-				
-				$('#img-check').show();
-				$('#btn-check').hide();
-			},
-			error: function(xhr, status, e){
-				console.error(status + ":" + e);
-			}
-		});
-	});
-})
-
-</script>
 </head>
 
 <body>
@@ -78,9 +36,6 @@ $(function(){
 				<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
-				<div class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-				</div>
 				<form class="navbar-form navbar-left">
 					<div class="input-group">
 						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
@@ -130,45 +85,20 @@ $(function(){
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Member join</h3>
+					<h3 class="page-title">Welcome to Dawon Site</h3>
 					<div class="row">
 						<div class="col-md-9">
 							<!-- INPUTS -->
 							<div class="panel">
-								<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
-									<div class="panel-body">
-										이름 : <input type="text" id="input_name" class="form-control" placeholder="이름">
-										<br>
-										학교: <input type="text" id="input_school" class="form-control" placeholder="학교">
-										<br>
-										학번: <input type="text" id="input_id" class="form-control" placeholder="학번">
-										
-										<img id="img-check" style="width:16px; display:none" src="assets/img/check.png" />	
-										<input id="btn-check" class="btn btn-default" type="button" value="중복확인">
-									
-										<br>
-										<br>
-										전공: <input type="text" id="input_major" class="form-control" placeholder="학교">
-										<br>
-								
-										
-										비밀번호: <input type="password" class="form-control" value="asecret">
-										<br>
-										
-										회원 등급:
-										<label class="fancy-radio">
-											<input name="level" value="pro" type="radio">
-											<span><i></i>교수</span>
-										</label>
-										<label class="fancy-radio">
-											<input name="level" value="student" type="radio" checked="checked">
-											<span><i></i>학생</span>
-										</label>
-										
-										<button class="btn btn-success" type="submit">가입하기</button>
-										 <button class="btn btn-default" onclick="history.back()">뒤로 	가기</button>
-									</div>
-								</form>
+								<div id="content">
+			<div id="user" style= "text-align:center;">
+				<p class="jr-success">
+					회원가입을 축하합니다.
+					<br><br>
+					<a href="${pageContext.request.contextPath }/user/login">로그인하기</a>
+				</p>				
+			</div>
+		</div>
 							</div>
 							<!-- END INPUTS -->
 							

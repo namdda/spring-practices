@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-	<title>MEMBER-JOIN | Klorofil - Free Bootstrap Dashboard Template</title>
+	<title>Elements | Klorofil - Free Bootstrap Dashboard Template</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -87,9 +87,13 @@ $(function(){
 						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 					</div>
 				</form>
+				<div class="navbar-btn navbar-btn-right">
+					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
+							
 							<ul class="dropdown-menu notifications">
 								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
 								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
@@ -125,6 +129,34 @@ $(function(){
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>메인 페이지로 가기</span></a></li>
+						<li><a href="elements.html" class="active"><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
+						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
+						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
+						<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="page-profile.html" class="">Profile</a></li>
+									<li><a href="page-login.html" class="">Login</a></li>
+									<li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
+						<li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
+						<li><a href="icons.html" class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
@@ -135,7 +167,7 @@ $(function(){
 						<div class="col-md-9">
 							<!-- INPUTS -->
 							<div class="panel">
-								<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
+								<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/update">
 									<div class="panel-body">
 										이름 : <input type="text" id="input_name" class="form-control" placeholder="이름">
 										<br>
@@ -155,22 +187,26 @@ $(function(){
 										비밀번호: <input type="password" class="form-control" value="asecret">
 										<br>
 										
-										회원 등급:
-										<label class="fancy-radio">
-											<input name="level" value="pro" type="radio">
-											<span><i></i>교수</span>
-										</label>
-										<label class="fancy-radio">
-											<input name="level" value="student" type="radio" checked="checked">
-											<span><i></i>학생</span>
-										</label>
+									
 										
 										<button class="btn btn-success" type="submit">가입하기</button>
-										 <button class="btn btn-default" onclick="history.back()">뒤로 	가기</button>
+										 <button class="btn btn-default" onclick="history.back()">뒤로 가기</button>
+										 <button  id="btn-remove" class="btn btn-danger" type="submit">탈퇴하기</button>
 									</div>
 								</form>
 							</div>
+							<script>
+								//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 주소이동(BoardController의 remove 메소드 호출)
+								$(function(){
+								$('#btn-remove').click(function(){
+									if(confirm("Are u sure?")){
+										self.location.href = "/user/remove?no=${userVo.no}";
+										}
+									});
+								});
+							</script>
 							<!-- END INPUTS -->
+							
 							
 						</div>
 					</div>
@@ -178,7 +214,6 @@ $(function(){
 			</div>
 			<!-- END MAIN CONTENT -->
 		</div>
-		<!-- END MAIN -->
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
