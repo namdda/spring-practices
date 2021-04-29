@@ -188,12 +188,11 @@ $(function(){
 										<br>
 										정원: <input type="text" id="input_major" class="form-control" placeholder="학교">
 										<br>
-							
-										
-									
+								
 										
 										<button class="btn btn-success" type="submit">등록하기</button>
 										 <button class="btn btn-default" onclick="history.back()">뒤로 가기</button>
+										  <button  id="btn-remove" class="btn btn-danger" type="submit">삭제하기</button>
 									</div>
 								</form>
 							</div>

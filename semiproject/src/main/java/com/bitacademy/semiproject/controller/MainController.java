@@ -1,13 +1,13 @@
-package com.bitacademy.mysite.controller;
+package com.bitacademy.semiproject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bitacademy.mysite.security.Auth;
+import com.bitacademy.semiproject.security.Auth;
 
 @Controller
 public class MainController {
-	@RequestMapping({"", "/main"})
+	@RequestMapping("")
 	public String index() {
 		return "main/index";
 	}

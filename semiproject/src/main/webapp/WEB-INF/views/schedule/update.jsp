@@ -162,7 +162,7 @@ $(function(){
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Member join</h3>
+					<h3 class="page-title">Subject update</h3>
 					<div class="row">
 						<div class="col-md-9">
 							<!-- INPUTS -->
@@ -188,15 +188,24 @@ $(function(){
 										<br>
 										정원: <input type="text" id="input_major" class="form-control" placeholder="학교">
 										<br>
-							
 										
-									
 										
-										<button class="btn btn-success" type="submit">등록하기</button>
+										 <button class="btn btn-success" type="submit">가입하기</button>
 										 <button class="btn btn-default" onclick="history.back()">뒤로 가기</button>
+										 <button  id="btn-remove" class="btn btn-danger" type="submit">탈퇴하기</button>
 									</div>
 								</form>
 							</div>
+								<script>
+								//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 주소이동(BoardController의 remove 메소드 호출)
+								$(function(){
+								$('#btn-remove').click(function(){
+									if(confirm("Are u sure?")){
+										self.location.href = "/user/remove?no=${userVo.no}";
+										}
+									});
+								});
+							</script>
 							<!-- END INPUTS -->
 							
 							
@@ -210,7 +219,7 @@ $(function(){
 		<footer>
 			<div class="container-fluid">
 				<p class="copyright">Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
-</p>
+				</p>
 			</div>
 		</footer>
 	</div>
